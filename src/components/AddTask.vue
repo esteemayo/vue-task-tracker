@@ -1,12 +1,12 @@
 <template>
-  <form className="add-form" @submit="onSubmit">
+  <form className="add-form" @submit.prevent="onSubmit">
     <div class="form-control">
       <label for="text">Text</label>
       <input
         type="text"
         id="text"
         name="text"
-        v-model="text"
+        v-model.trim="text"
         placeholder="Add Task"
       />
     </div>
@@ -17,7 +17,7 @@
         type="text"
         id="day"
         name="day"
-        v-model="day"
+        v-model.trim="day"
         placeholder="Add Day & Time"
       />
     </div>
@@ -42,9 +42,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(e) {
-      e.preventDefault();
-
+    onSubmit() {
       if (!this.text) {
         alert('Please add a task');
         return;

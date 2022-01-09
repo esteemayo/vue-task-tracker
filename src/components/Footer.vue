@@ -1,8 +1,8 @@
 <template>
   <footer>
     <p>
-      Copyright &copy; {{ new Date().getFullYear() }}. All rights reserved.
-      Design by Emmanuel Adebayo&trade;
+      Copyright &copy; {{ year }}. All rights reserved. Design by Emmanuel
+      Adebayo&trade;
     </p>
     <router-link to="/about">About</router-link>
   </footer>
@@ -11,6 +11,11 @@
 <script>
 export default {
   name: 'Footer',
+  computed: {
+    year() {
+      return new Date().getFullYear();
+    },
+  },
 };
 </script>
 
