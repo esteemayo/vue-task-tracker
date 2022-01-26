@@ -32,34 +32,35 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
+
 export default {
   name: 'AddTask',
-  data() {
-    return {
-      text: '',
-      day: '',
-      reminder: false,
-    };
-  },
-  methods: {
-    onSubmit() {
-      if (!this.text) {
+  setup(_, { emit }) {
+    const text = ref('');
+    const day = ref('');
+    const reminder = ref(false);
+
+    function onSubmit() {
+      if (!text.value) {
         alert('Please add a task');
         return;
       }
 
       const newTask = {
-        text: this.text,
-        day: this.day,
-        reminder: this.reminder,
+        text: text.value,
+        day: day.value,
+        reminder: reminder.value,
       };
 
-      this.$emit('add-task', newTask);
+      emit('add-task', newTask);
 
-      this.text = '';
-      this.day = '';
-      this.reminder = false;
-    },
+      text.value = '';
+      day.value = '';
+      reminder.value = false;
+    }
+
+    return { text, day, reminder, onSubmit };
   },
 };
 </script>
@@ -83,6 +84,11 @@ export default {
   margin: 5px;
   padding: 3px 7px;
   font-size: 17px;
+  caret-color: green;
+}
+
+.form-control input:focus {
+  outline: none;
 }
 
 .form-control-check {
